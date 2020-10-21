@@ -1,10 +1,9 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 import SuccessContext from "./successContext";
-import successContext from "./successContext";
 
 const FunctionalComponent = () => {
-  successContext.useSuccess();
+  SuccessContext.useSuccess();
   return <div />;
 };
 
