@@ -5,15 +5,15 @@ import GuessedWords from "./GuessedWords";
 describe("if there are no words guessed", () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<GuessedWords />);
+    wrapper = shallow(<GuessedWords {...{ guessedWords: [] }} />);
   });
   test("renders without error", () => {
-    const component = wrapper.find(`[data-test="component-guessed-words"`);
+    const component = wrapper.find(`[data-test="component-guessed-words"]`);
     expect(component.length).toBe(1);
   });
   test("renders instructions to guess a word", () => {
     const instructions = wrapper.find(`[data-test="guess-instructions"]`);
-    expect(instructions.text().length).not.toBe(1);
+    expect(instructions.text().length).not.toBe(0);
   });
 });
 describe("if there are words guessed", () => {
@@ -27,7 +27,7 @@ describe("if there are words guessed", () => {
     wrapper = shallow(<GuessedWords {...{ guessedWords: guessedWords }} />);
   });
   test("renders without error", () => {
-    const component = wrapper.find(`[data-test="component-guessed-words"`);
+    const component = wrapper.find(`[data-test="component-guessed-words"]`);
     expect(component.length).toBe(1);
   });
   test("renders 'guessed words' section", () => {
