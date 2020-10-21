@@ -1,8 +1,12 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 import SuccessContext from "./successContext";
+import successContext from "./successContext";
 
-const FunctionalComponent = () => {};
+const FunctionalComponent = () => {
+  successContext.useSuccess();
+  return <div />;
+};
 
 test("useSuccess throws error when not wrapped in SuccessProvider", () => {
   expect(() => {
@@ -13,9 +17,9 @@ test("useSuccess throws error when not wrapped in SuccessProvider", () => {
 test("useSuccess does not throw error when wrapped in SuccessProvider", () => {
   expect(() => {
     mount(
-      <SuccessContext.Provider>
+      <SuccessContext.SuccessProvider>
         <FunctionalComponent />
-      </SuccessContext.Provider>
+      </SuccessContext.SuccessProvider>
     );
   }).not.toThrow();
 });
