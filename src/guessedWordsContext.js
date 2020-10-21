@@ -21,3 +21,4 @@ export function GuessedWordsProvider(props) {
 
   return <guessedWordsContext.Provider value={value} {...props} />;
 }
+export default { GuessedWordsProvider, useGuessedWords };
