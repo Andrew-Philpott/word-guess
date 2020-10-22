@@ -1,8 +1,8 @@
 import React from "react";
 import { mount } from "enzyme";
 import Input from "./Input";
-import SuccessContext from "./successContext";
-import GuessedWordsContext from "./guessedWordsContext";
+import { SuccessProvider } from "./successContext";
+import { GuessedWordsProvider } from "./guessedWordsContext";
 import { checkPropTypes } from "prop-types";
 
 const setup = ({ secretWord, success }) => {
@@ -10,11 +10,11 @@ const setup = ({ secretWord, success }) => {
   success = success || false;
 
   return mount(
-    <SuccessContext.SuccessProvider va>
-      <GuessedWordsContext.GuessedWordsProvider>
+    <SuccessProvider value={[success, jest.fn()]}>
+      <GuessedWordsProvider>
         <Input secretWord={secretWord} />
-      </GuessedWordsContext.GuessedWordsProvider>
-    </SuccessContext.SuccessProvider>
+      </GuessedWordsProvider>
+    </SuccessProvider>
   );
 };
 test("Input renders without error", () => {
