@@ -1,6 +1,7 @@
 import React from "react";
 import { useSuccess } from "./successContext";
 import { useGuessedWords } from "./guessedWordsContext";
+import getLetterMatchCount from "./getLetterMatchCount";
 import PropTypes from "prop-types";
 
 function Input({ secretWord }) {
@@ -25,11 +26,7 @@ function Input({ secretWord }) {
           data-test="submit-button"
           onClick={(e) => {
             e.preventDefault();
-            const secretLetters = secretWord.split("");
-            const guessedLetters = new Set(currentGuess);
-            const count = secretLetters.filter((letter) =>
-              guessedLetters.has(letter)
-            ).length;
+            const count = getLetterMatchCount(currentGuess, secretWord);
             const newGuessedWords = [
               ...guessedWords,
               { word: currentGuess, letterMatchCount: count },
