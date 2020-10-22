@@ -1,11 +1,24 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 import GuessedWords from "./GuessedWords";
+import guessedWordsContext from "./guessedWordsContext";
+
+const setup = (guessedWords = []) => {
+  const mockUseGuessedWords = jest
+    .fn()
+    .mockReturnValue([guessedWords, jest.fn()]);
+  guessedWordsContext.useGuessedWords = mockUseGuessedWords;
+  return mount(
+    <guessedWordsContext.GuessedWordsProvider>
+      <GuessedWords />
+    </guessedWordsContext.GuessedWordsProvider>
+  );
+};
 
 describe("if there are no words guessed", () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<GuessedWords {...{ guessedWords: [] }} />);
+    wrapper = setup([]);
   });
   test("renders without error", () => {
     const component = wrapper.find(`[data-test="component-guessed-words"]`);
@@ -24,7 +37,7 @@ describe("if there are words guessed", () => {
     { word: "party", letterMatchCount: 5 },
   ];
   beforeEach(() => {
-    wrapper = shallow(<GuessedWords {...{ guessedWords: guessedWords }} />);
+    wrapper = setup(guessedWords);
   });
   test("renders without error", () => {
     const component = wrapper.find(`[data-test="component-guessed-words"]`);

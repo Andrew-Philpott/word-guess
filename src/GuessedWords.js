@@ -1,5 +1,7 @@
 import React from "react";
-export default ({ guessedWords }) => {
+import guessedWordsContext from "./guessedWordsContext";
+export default () => {
+  const [guessedWords] = guessedWordsContext.useGuessedWords();
   return (
     <div data-test="component-guessed-words">
       {guessedWords.length === 0 ? (
